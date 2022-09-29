@@ -34,20 +34,23 @@ class MoviesActivity : AppCompatActivity() {
     private fun fetchMovies() {
         val url = "https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}"
         val client = AsyncHttpClient()
-        client[url, null, object : JsonHttpResponseHandler() {
-            override fun onSuccess(statusCode: Int, headers: Headers, response: JSON) {
+        client.get(url, null, object : JsonHttpResponseHandler() {
+            override fun onSuccess(statusCode: Int, headers: Headers, response: JsonHttpResponseHandler.JSON) {
                 try {
+                    Log.i("MoviesActivity", "Here")
                     val moviesJson = response.jsonObject.getJSONArray("results")
                     movies = Movie.fromJSONArray(moviesJson)
                 } catch (e: JSONException) {
+                    Log.i("MoviesActivity", "Bye")
                     e.printStackTrace()
                 }
             }
 
             override fun onFailure(statusCode: Int, headers: Headers, response: String, throwable: Throwable) {
+                Log.e("MoviesActivity", "Response $response $throwable")
                 Log.e(MoviesActivity::class.java.simpleName, "Error retrieving movies: ", throwable)
             }
-        }]
+        })
     }
 
     companion object {

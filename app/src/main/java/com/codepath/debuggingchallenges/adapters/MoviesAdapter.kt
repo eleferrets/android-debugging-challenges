@@ -21,7 +21,7 @@ class MoviesAdapter(private val movies: List<Movie>?) : RecyclerView.Adapter<Mov
     }
 
     override fun getItemCount(): Int {
-        return 0
+        return movies?.size as Int
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
