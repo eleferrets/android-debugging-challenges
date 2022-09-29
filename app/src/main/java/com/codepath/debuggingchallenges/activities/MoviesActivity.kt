@@ -32,7 +32,7 @@ class MoviesActivity : AppCompatActivity() {
     }
 
     private fun fetchMovies() {
-        val url = "https://api.themoviedb.org/3/movie/now_playing?${API_KEY}"
+        val url = "https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}"
         val client = AsyncHttpClient()
         client[url, null, object : JsonHttpResponseHandler() {
             override fun onSuccess(statusCode: Int, headers: Headers, response: JSON) {
